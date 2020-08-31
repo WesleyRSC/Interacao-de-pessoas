@@ -27,11 +27,21 @@ public class InteracaoDePessoas {
         );
         coletarDados();
         interagir(p1,p2);
+        System.out.println("Conforme foi apresentado podemos ver que:\n");
+        gerarResultado(p1);
+        gerarResultado(p2);
+        
+        System.out.println("FIM DO EXPERIMENTO!!");
     }
     
     public static void interagir(Pessoa p1,Pessoa p2){
         p1.saudar(p2);
         p2.responderSaudacao(p1);
+        p1.responderTrabalho();
+        p2.responderTrabalhoFinal();
+        p1.despedida();
+        p2.responderDespedida();
+        
     }
     
     public static void coletarDados(){
@@ -103,7 +113,7 @@ public class InteracaoDePessoas {
                     p1 = new Programador(nome,sexo, "Programador");
                 }
                 else{
-                    p2 = new Programador(nome,sexo, "AProgramadortor");
+                    p2 = new Programador(nome,sexo, "Programador");
                 }
                 break;
             case 3:
@@ -114,9 +124,23 @@ public class InteracaoDePessoas {
                     p2 = new Desempregado(nome,sexo, "Desempregado");
                 }
                 break;     
-        }
-                
+        }                
     }
+    public static void gerarResultado(Pessoa resultado){
+        String resposta;
+        if(resultado.getProfissao().equals("Desempregado"))
+            resposta=resultado.getNome()+" Está desempregado";
+        else
+            resposta=resultado.getNome()+" Trabalha como "+resultado.getProfissao();
+        if(resultado.verFelicidade(resultado))
+            resposta+=" e está infeliz com isso ;-;";
+        else
+            resposta+=" e é feliz com isso :D";
+        
+        System.out.println(resposta);
+    }
+    
+    
   
 }
    

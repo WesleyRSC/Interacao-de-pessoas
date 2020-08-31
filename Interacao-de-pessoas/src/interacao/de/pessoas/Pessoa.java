@@ -14,16 +14,19 @@ import java.util.*;
 public class Pessoa {
     
     public Random rnd= new Random();
-    public int nrSaudacao,nrRespostaPerguntarTrabalho,nrRespostaTrabalho;
+    public int nrSaudacao,nrRespostaPerguntarTrabalho,nrRespostaTrabalho=0,nrRespostaTrabalhoFinal=0,nrDespedida,nrDespedidaFinal;
     private String nome;
     private char sexo;
-    private boolean feliz;
+    public boolean feliz;
+    private String profissao;
     
     
-    public Pessoa (String nome, char sexo){
+    public Pessoa (String nome, char sexo , String profissao){
         this.nome = nome;
         this.sexo=sexo;
+        this.profissao=profissao;
     }
+    
     
      /**
      * @return the nome
@@ -38,19 +41,20 @@ public class Pessoa {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    /**
-     * @return the feliz
+    
+        /**
+     * @return the profissao
      */
-    public boolean isFeliz() {
-        return feliz;
+    public String getProfissao() {
+        return profissao;
     }
+
     /**
-     * @param feliz the feliz to set
+     * @param profissao the profissao to set
      */
-    public void setFeliz(boolean feliz) {
-        this.feliz = feliz;
+    public void setProfissao(String profissao) {
+        this.profissao = profissao;
     }
-  
     
     
     public void saudar(Pessoa outraPessoa){
@@ -100,8 +104,34 @@ public class Pessoa {
     }
     
     public void responderTrabalho(){
-  
     }
+    
+    public void responderTrabalhoFinal(){}
+    public void despedida(){
+        ArrayList<String> resposta = new ArrayList();
+        resposta.add(0,"\n"+ this.getNome() + ": Bom já vou indo nessa, até outro dia\n");
+        resposta.add(1,"\n"+ this.getNome() + ": Vou precisar ir agora, até depois\n");
+        resposta.add(2,"\n"+ this.getNome() + ": De qualquer forma foi bom falar com você, tenho que ir, até breve.\n");
+        
+        nrDespedida=rnd.nextInt(resposta.size());
+        escrever(resposta,nrDespedida);
+    }
+    
+    public void responderDespedida(){
+        ArrayList<String> resposta = new ArrayList();
+        resposta.add(0,"\n"+ this.getNome() + ": Tchau Tchau :D\n");
+        resposta.add(1,"\n"+ this.getNome() + ": Até logo, tenha uma ótima semana\n");
+        resposta.add(2,"\n"+ this.getNome() + ": Até mais, depois conversamos de novo.\n");
+        nrDespedidaFinal=rnd.nextInt(resposta.size());
+        escrever(resposta,nrDespedidaFinal);
+    }
+    
+    public boolean verFelicidade(Pessoa pessoa){
+        pessoa.feliz=(pessoa.nrRespostaTrabalho<=1 || pessoa.nrRespostaTrabalhoFinal<=1); 
+        return pessoa.feliz;
+    }
+
+
 }
 
 
